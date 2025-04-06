@@ -18,26 +18,8 @@ jobs:
     strategy:
       matrix:
         blender_version:
-          - { version: "3.4.1", short: "3.4" }
-          - { version: "3.5.1", short: "3.5" }
-          - { version: "3.6.18", short: "3.6" }
-          - { version: "4.0.2", short: "4.0" }
-          - { version: "4.1.1", short: "4.1" }
-          - { version: "4.2.4", short: "4.2" }
-          - { version: "4.3.0", short: "4.3" }
           - { version: "4.3.2", short: "4.3" }
         ubuntu_cuda_version:
-          - { version: "11.7.1-cudnn8-devel-ubuntu20.04", short: "cuda11.7.1-ubuntu20.04" }
-          - { version: "11.7.1-cudnn8-devel-ubuntu22.04", short: "cuda11.7.1-ubuntu22.04" }
-          - { version: "11.8.0-cudnn8-devel-ubuntu20.04", short: "cuda11.8.0-ubuntu20.04" }
-          - { version: "11.8.0-cudnn8-devel-ubuntu22.04", short: "cuda11.8.0-ubuntu22.04" }
-          - { version: "12.1.1-cudnn8-devel-ubuntu20.04", short: "cuda12.1.1-ubuntu20.04" }
-          - { version: "12.1.1-cudnn8-devel-ubuntu22.04", short: "cuda12.1.1-ubuntu22.04" }
-          - { version: "12.4.1-cudnn-devel-ubuntu20.04", short: "cuda12.4.1-ubuntu20.04" }
-          - { version: "12.4.1-cudnn-devel-ubuntu22.04", short: "cuda12.4.1-ubuntu22.04" }
-          - { version: "12.6.3-cudnn-devel-ubuntu20.04", short: "cuda12.6.3-ubuntu20.04" }
-          - { version: "12.6.3-cudnn-devel-ubuntu22.04", short: "cuda12.6.3-ubuntu22.04" }
-          - { version: "12.6.3-cudnn-devel-ubuntu24.04", short: "cuda12.6.3-ubuntu24.04" }
           - { version: "12.8.1-cudnn-devel-ubuntu24.04", short: "cuda12.8.1-ubuntu24.04" }
 
     steps:
