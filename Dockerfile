@@ -33,7 +33,6 @@ RUN apt-get update && apt-get -q install -y --no-install-recommends --fix-missin
     mesa-utils \
     pkg-config \
     wget \
-    curl \
     python3 \
     python3-pip
 RUN apt-get -q install -y --no-install-recommends --fix-missing \
