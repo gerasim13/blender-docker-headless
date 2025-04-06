@@ -25,6 +25,7 @@ jobs:
           - { version: "4.1.1", short: "4.1" }
           - { version: "4.2.4", short: "4.2" }
           - { version: "4.3.0", short: "4.3" }
+          - { version: "4.3.2", short: "4.3" }
         ubuntu_cuda_version:
           - { version: "11.7.1-cudnn8-devel-ubuntu20.04", short: "cuda11.7.1-ubuntu20.04" }
           - { version: "11.7.1-cudnn8-devel-ubuntu22.04", short: "cuda11.7.1-ubuntu22.04" }
@@ -37,6 +38,7 @@ jobs:
           - { version: "12.6.3-cudnn-devel-ubuntu20.04", short: "cuda12.6.3-ubuntu20.04" }
           - { version: "12.6.3-cudnn-devel-ubuntu22.04", short: "cuda12.6.3-ubuntu22.04" }
           - { version: "12.6.3-cudnn-devel-ubuntu24.04", short: "cuda12.6.3-ubuntu24.04" }
+          - { version: "12.8.1-cudnn-devel-ubuntu24.04", short: "cuda12.8.1-ubuntu24.04" }
 
     steps:
       # Checkout the repository
