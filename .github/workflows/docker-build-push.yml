@@ -20,6 +20,7 @@ jobs:
       matrix:
         blender_version:
           - { version: "4.3.2", short: "4.3" }
+          - { version: "4.4.1", short: "4.4" }
         ubuntu_cuda_version:
           - { version: "12.8.1-cudnn-devel-ubuntu24.04", short: "cuda12.8.1-ubuntu24.04" }
 
