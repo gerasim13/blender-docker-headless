@@ -19,6 +19,7 @@ jobs:
     strategy:
       matrix:
         blender_version:
+          - { version: "4.0.2", short: "4.0" }
           - { version: "4.3.2", short: "4.3" }
           - { version: "4.4.1", short: "4.4" }
         ubuntu_cuda_version:
