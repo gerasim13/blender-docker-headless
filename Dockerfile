@@ -2,28 +2,41 @@ ARG UBUNTU_CUDA_VERSION=11.7.1-cudnn8-devel-ubuntu20.04
 FROM nvidia/cuda:$UBUNTU_CUDA_VERSION
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES all
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=all
+ENV __GLX_VENDOR_LIBRARY_NAME=nvidia
+ENV __EGL_VENDOR_LIBRARY_NAME=nvidia
+ENV XDG_RUNTIME_DIR=/run/user/0
+ENV DISPLAY=:99
+ENV HW=GPU
 
 # Update and install dependencies
-RUN apt-get update && apt-get -q install -y --no-install-recommends --fix-missing \
-    automake \
+RUN apt-get update && \
+    apt-get -q install -y --no-install-recommends --fix-missing \
     autoconf \
+    automake \
     build-essential \
+    curl \
+    ffmpeg \
     git \
     libbz2-dev \
     libegl1 \
     libfontconfig1 \
     libgl1 \
+    libgl1-mesa-dri \
+    libgles2 \
     libglvnd-dev \
+    libglvnd0 \
+    libglx-mesa0 \
+    libglx0 \
     libgtk-3-0 \
     libsm6 \
     libtool \
     libx11-6 \
     libx11-dev \
     libxcursor1 \
-    libxext6 \
     libxext-dev \
+    libxext6 \
     libxi6 \
     libxinerama1 \
     libxkbcommon0 \
@@ -32,12 +45,15 @@ RUN apt-get update && apt-get -q install -y --no-install-recommends --fix-missin
     libxxf86vm1 \
     mesa-utils \
     pkg-config \
-    wget \
     python3 \
-    python3-pip
+    python3-pip \
+    wget
 RUN apt-get -q install -y --no-install-recommends --fix-missing \
+    x-window-system \
     x11proto-dev \
     x11proto-gl-dev \
+    xorg \
+    xserver-xorg-video-all \
     xvfb
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
