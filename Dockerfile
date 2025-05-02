@@ -4,11 +4,6 @@ FROM nvidia/cuda:$UBUNTU_CUDA_VERSION
 ENV DEBIAN_FRONTEND=noninteractive
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=all
-ENV __GLX_VENDOR_LIBRARY_NAME=nvidia
-ENV __EGL_VENDOR_LIBRARY_NAME=nvidia
-ENV XDG_RUNTIME_DIR=/run/user/0
-ENV DISPLAY=:99
-ENV HW=GPU
 
 # Update and install dependencies
 RUN apt-get update && \
@@ -90,4 +85,9 @@ RUN git clone https://github.com/NVIDIA/libglvnd.git /tmp/libglvnd \
     && rm -rf /tmp/libglvnd
 
 ENV EGL_DRIVER=nvidia
+ENV GLX_DRIVER=nvidia
+ENV __GLX_VENDOR_LIBRARY_NAME=nvidia
+ENV __EGL_VENDOR_LIBRARY_NAME=nvidia
 ENV __EGL_VENDOR_LIBRARY_DIRS=/usr/share/glvnd/egl_vendor.d
+ENV DISPLAY=:99
+ENV HW=GPU
