@@ -1,32 +1,44 @@
 # Blender Docker Headless
 
-[![actions](https://github.com/haiyimei/blender-docker-headless/actions/workflows/docker-build-push.yml/badge.svg)](https://github.com/haiyimei/blender-docker-headless/actions/workflows/docker-build-push.yml)
-[![docker](https://img.shields.io/docker/pulls/meihaiyi/blender)](https://hub.docker.com/r/meihaiyi/blender)
+[![actions](https://github.com/gerasim13/blender-docker-headless/actions/workflows/docker-build-push.yml/badge.svg)](https://github.com/gerasim13/blender-docker-headless/actions/workflows/docker-build-push.yml)
+[![docker](https://img.shields.io/docker/pulls/gerasim13/blender)](https://hub.docker.com/r/gerasim13/blender)
 [![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 :rocket: This repository provides a bunch of Docker images for Blender optimized for **<ins>headless</ins>** rendering. It fully supports both **<ins>EEVEE</ins>** and **<ins>CYCLES</ins>** render engines with GPU acceleration through **EGL**.
 
+Current default target:
+
+- Blender `4.5.1 LTS`
+- CUDA `12.8.1`
+- Ubuntu `24.04`
+
 ## Usage
 
 ```bash
-docker run -it --rm --gpus all -v $(pwd):/workspace -w /workspace meihaiyi/blender:blender-3.6-cuda11.7.1-ubuntu20.04
+docker run -it --rm --gpus all -v $(pwd):/workspace -w /workspace gerasim13/blender:blender-4.5.1-cuda12.8.1-ubuntu24.04
 ```
 
 ## Build
 
 ```bash
-docker build -t meihaiyi/blender:blender-3.6-cuda11.7.1-ubuntu20.04 . --build-arg BLENDER_VERSION=3.6.18 --build-arg UBUNTU_CUDA_VERSION=11.7.1-cudnn8-devel-ubuntu20.04
+docker build -t gerasim13/blender:blender-4.5.1-cuda12.8.1-ubuntu24.04 . --build-arg BLENDER_VERSION=4.5.1 --build-arg UBUNTU_CUDA_VERSION=12.8.1-cudnn-devel-ubuntu24.04
 ```
 
 ## Test
 
 ```bash
-docker run --rm --gpus all -v $(pwd):/workspace -w /workspace meihaiyi/blender:blender-3.6-cuda11.7.1-ubuntu20.04 blender -b --python tests/render_eevee.py
+docker run --rm --gpus all -v $(pwd):/workspace -w /workspace gerasim13/blender:blender-4.5.1-cuda12.8.1-ubuntu24.04 blender -b --python tests/render_eevee.py
 ```
 
 ```bash
-docker run --rm --gpus all -v $(pwd):/workspace -w /workspace meihaiyi/blender:blender-3.6-cuda11.7.1-ubuntu20.04 blender -b --python tests/render_cycles.py
+docker run --rm --gpus all -v $(pwd):/workspace -w /workspace gerasim13/blender:blender-4.5.1-cuda12.8.1-ubuntu24.04 blender -b --python tests/render_cycles.py
 ```
+
+## Version Notes
+
+- Blender `4.5 LTS` is the current long-term support line from Blender, supported until July 2027.
+- Blender `4.5.1` is the first bugfix release in that LTS line.
+- Cycles OptiX in Blender `4.5` requires an NVIDIA driver new enough for OptiX support. Blender's release notes list `535` as the minimum driver version for OptiX in this release line.
 
 ## Key
 
