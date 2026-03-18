@@ -55,14 +55,38 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Add build arguments
 ARG BLENDER_VERSION=4.5.1
 ARG BLENDER_MIRROR_URL=https://mirror.clarkson.edu/blender/release
+ARG BLENDER_FALLBACK_URL=https://download.blender.org/release
 
 # Update Blender installation to use both arguments
-RUN echo "Blender URL: ${BLENDER_MIRROR_URL}/Blender${BLENDER_VERSION%.*}/blender-${BLENDER_VERSION}-linux-x64.tar.xz"
-RUN wget --no-verbose --show-progress --progress=dot:giga \
-    ${BLENDER_MIRROR_URL}/Blender${BLENDER_VERSION%.*}/blender-${BLENDER_VERSION}-linux-x64.tar.xz -O /tmp/blender.tar.xz \
-        && tar -xf /tmp/blender.tar.xz -C /opt/ \
-        && mv /opt/blender-${BLENDER_VERSION}-linux-x64 /opt/blender \
-        && rm /tmp/blender.tar.xz
+RUN set -eux; \
+    archive="blender-${BLENDER_VERSION}-linux-x64.tar.xz"; \
+    primary_url="${BLENDER_MIRROR_URL}/Blender${BLENDER_VERSION%.*}/${archive}"; \
+    fallback_url="${BLENDER_FALLBACK_URL}/Blender${BLENDER_VERSION%.*}/${archive}"; \
+    echo "Primary Blender URL: ${primary_url}"; \
+    echo "Fallback Blender URL: ${fallback_url}"; \
+    wget \
+      --tries=5 \
+      --retry-connrefused \
+      --waitretry=5 \
+      --timeout=60 \
+      --read-timeout=60 \
+      --no-verbose \
+      --show-progress \
+      --progress=dot:giga \
+      "${primary_url}" -O /tmp/blender.tar.xz \
+    || wget \
+      --tries=5 \
+      --retry-connrefused \
+      --waitretry=5 \
+      --timeout=60 \
+      --read-timeout=60 \
+      --no-verbose \
+      --show-progress \
+      --progress=dot:giga \
+      "${fallback_url}" -O /tmp/blender.tar.xz; \
+    tar -xf /tmp/blender.tar.xz -C /opt/; \
+    mv /opt/blender-${BLENDER_VERSION}-linux-x64 /opt/blender; \
+    rm /tmp/blender.tar.xz
 
 # Set Blender path
 ENV PATH="/opt/blender:$PATH"
